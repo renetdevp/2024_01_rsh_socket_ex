@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <script src="https://cdn.socket.io/4.7.5/socket.io.min.js" integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO" crossorigin="anonymous"></script>
+        <script>
+            window.onload = function (){
+                const socket = io();
+                const cmdText = document.getElementById('cmd');
+
+                cmdText.onkeydown = function (e){
+                    if (e.key == "Enter"){
+                        console.log('hos');
+                        socket.emit('cmd', cmdText.value);
+                    }
+                }
+
+                socket.on('result', (arg) => {
+                    const result = document.getElementById('result');
+
+                    result.innerText = arg;
+                });
+            };
+        </script>
+    </head>
+    <body>
+        <input type="text" id="cmd">
+        <div id="result"></div>
+    </body>
+</html>
